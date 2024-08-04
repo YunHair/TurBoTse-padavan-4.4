@@ -146,7 +146,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y libtool-bin gperf python3-docutils autopoint gettext ccache
           echo "TRUNK_DIR=${{ github.workspace }}/trunk" >> $GITHUB_ENV
-          echo "Compilation_time=$(TZ='Asia/Shanghai' date +%Y%m%d)" >> $GITHUB_ENV
+          echo "Compilation_time=$(TZ='Asia/Shanghai' date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
       - name: Prepare toolchain
         run: |
           mkdir -p ${{ github.workspace }}/$TOOLCHAIN_ROOT
@@ -228,7 +228,7 @@ jobs:
         if: ${{ github.event.inputs.release == 'true' }}
         with:
           commit: ${{ github.sha }}
-          tag: ${{ env.Compilation_time }}
+          tag: ${{ env.Compilation_time }}_custom
           artifacts: trunk/firmwares/*.trx
           allowUpdates: true
           omitBodyDuringUpdate: true
