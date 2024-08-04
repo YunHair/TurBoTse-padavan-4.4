@@ -114,7 +114,7 @@ on:
       oldworkflow:
         type: boolean
         description: 'Delete old workflow runs'
-        default: true
+        default: false
 env:
   FIRMWARE_AUTHOR: TurBoTse
   TOOLCHAIN_ROOT: toolchain/toolchain-mipsel
