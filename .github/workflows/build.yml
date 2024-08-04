@@ -27,7 +27,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y libtool-bin gperf python3-docutils autopoint gettext ccache
           echo "ROOTDIR=${{ github.workspace }}/trunk" >> $GITHUB_ENV
-          echo "Compilation_time=$(TZ='Asia/Shanghai' date +%Y%m%d)" >> $GITHUB_ENV
+          echo "Compilation_time=$(TZ='Asia/Shanghai' date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
       - name: Start build firmware
         run: |
           make ${{ matrix.target }} TOOLCHAIN=${{ matrix.toolchain }}
@@ -38,7 +38,7 @@ jobs:
       - uses: ncipollo/release-action@main
         with:
           commit: ${{ github.sha }}
-          tag: ${{ env.Compilation_time }}
+          tag: ${{ env.Compilation_time }}_build
           artifacts: trunk/images/*.trx
           allowUpdates: true
           omitBodyDuringUpdate: true
